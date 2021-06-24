@@ -17,13 +17,11 @@ def default(test):
 @app.route('/get_song')
 def getSongInfo():
     current_track_id = None
-    while True:
-        current_track_info = get_current_track(ACCESS_TOKEN)
-        if current_track_info['id'] != current_track_id:
-            # pprint(current_track_info,indent=4)
-            current_track_id = current_track_info['id']
-            return current_track_info
-    time.sleep(200)
+    current_track_info = get_current_track(ACCESS_TOKEN)
+    if current_track_info['id'] != current_track_id:
+        # pprint(current_track_info,indent=4)
+        current_track_id = current_track_info['id']
+        return current_track_info
     
 def get_current_track(access_token):
     response = requests.get(
