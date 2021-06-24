@@ -5,17 +5,13 @@ from pprint import pprint
 
 app = Flask(__name__)
 
-
-
 @app.route('/test/<test>')
 def default(test):
     return "Testing Flask App" + test
 
-
 @app.route('/get_song')
 def getSongInfo():
-    SPOTIFY_GET_CURRENT_TRACK_URL = 'https://api.spotify.com/v1/me/player/currently-playing'
-    ACCESS_TOKEN = 'BQBmbDSI0qoZPlKNv6JN_A_BKl-zWlh92kRBmBUFVYg0e4D3SQ3R1hfhRvBQNYxH53oPCXT_MJ7AOXCWvHDEOmfPOs5BDnUh1sHwZKDka7_1MWNcwAFtjCpt0pEgOKHUb8uiidFumVqESwZo6CO6OSZ9QKgnbDSXhUmyHl2kZw'
+    
     current_track_id = None
     current_track_info = get_current_track(ACCESS_TOKEN)
     if current_track_info['id'] != current_track_id:
@@ -24,6 +20,8 @@ def getSongInfo():
         return current_track_info
     
 def get_current_track(access_token):
+    SPOTIFY_GET_CURRENT_TRACK_URL = 'https://api.spotify.com/v1/me/player/currently-playing'
+    ACCESS_TOKEN = 'BQBmbDSI0qoZPlKNv6JN_A_BKl-zWlh92kRBmBUFVYg0e4D3SQ3R1hfhRvBQNYxH53oPCXT_MJ7AOXCWvHDEOmfPOs5BDnUh1sHwZKDka7_1MWNcwAFtjCpt0pEgOKHUb8uiidFumVqESwZo6CO6OSZ9QKgnbDSXhUmyHl2kZw'
     response = requests.get(
         SPOTIFY_GET_CURRENT_TRACK_URL,
         headers={
