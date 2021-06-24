@@ -28,23 +28,23 @@ def get_current_track(access_token):
         }
     )
     json_resp = response.json()
+    print(json_resp)
+    # track_id = json_resp['item']['id']
+    # track_name = json_resp['item']['name']
+    # artists = [artist for artist in json_resp['item']['artists']]
 
-    track_id = json_resp['item']['id']
-    track_name = json_resp['item']['name']
-    artists = [artist for artist in json_resp['item']['artists']]
+    # link = json_resp['item']['external_urls']['spotify']
 
-    link = json_resp['item']['external_urls']['spotify']
+    # artist_names = ', '.join([artist['name'] for artist in artists])
 
-    artist_names = ', '.join([artist['name'] for artist in artists])
+    # current_track_info = {
+    # 	"id": track_id,
+    # 	"track_name": track_name,
+    # 	"artists": artist_names,
+    # 	"link": link
+    # }
 
-    current_track_info = {
-    	"id": track_id,
-    	"track_name": track_name,
-    	"artists": artist_names,
-    	"link": link
-    }
-
-    return current_track_info
+    return json_resp
 
 
 
