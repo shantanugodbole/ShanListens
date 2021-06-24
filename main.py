@@ -20,7 +20,7 @@ def getSongInfo():
     while True:
         current_track_info = get_current_track(ACCESS_TOKEN)
         if current_track_info['id'] != current_track_id:
-            pprint(current_track_info,indent=4)
+            # pprint(current_track_info,indent=4)
             current_track_id = current_track_info['id']
             return current_track_info
     time.sleep(200)
