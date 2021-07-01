@@ -1,55 +1,28 @@
+import tweepy
 import requests
 import time
-from flask import Flask, request
-from pprint import pprint
 
-app = Flask(__name__)
-SPOTIFY_GET_CURRENT_TRACK_URL = 'https://api.spotify.com/v1/me/player/currently-playing'
-ACCESS_TOKEN = 'BQAdtz6lRlvsWm4iVL2BWRRbQky2qtYR40eJVdodaxzXdiWAs3Bk0ru-FDCNNUEJAhVnh8Fi-DP4NMIyRLlEdqhTB5z1CjQpNmus6NwI7cmtzDIxJ6YkAnGYsPBcqE96OCWr5dTle56koZBFcZ3JLBjrvIIlgHtXVks2AetpvA'
-@app.route('/test/<test>')
-def default(test):
-    return "Testing Flask App" + test
+API_KEY = "0fRg4S3x3fpavfD2wj84Pc5H3"
+API_SECRET_KEY = "EYVJMmTuIzMeIL5LuWciNTY1X2OfjP6jDG6vg2QaxgWhnQ2kxV"
+ACCESS_TOKEN = "1407756418569048067-ZbPnVjXxhG4sPyW54IQykd5AljECBi"
+ACCESS_TOKEN_SECRET = "6wB29PK9S6SGEeZNksxipkTD4FAtOy3KUyFyZK4ge84Ay"
 
-@app.route('/get_song')
-def getSongInfo():
-    
-    current_track_id = None
-    current_track_info = get_current_track(ACCESS_TOKEN)
-    if current_track_info['id'] != current_track_id:
-        pprint(current_track_info,indent=4)
-        current_track_id = current_track_info['id']
-        return current_track_info
-    
-def get_current_track(access_token):
-    
-    response = requests.get(
-        SPOTIFY_GET_CURRENT_TRACK_URL,
-        headers={
-            "Authorization": f"Bearer {access_token}"
-        }
-    )
-    print(response)
-    json_resp = response.json()
-    print(json_resp)
-    track_id = json_resp['item']['id']
-    track_name = json_resp['item']['name']
-    artists = [artist for artist in json_resp['item']['artists']]
-
-    link = json_resp['item']['external_urls']['spotify']
-
-    artist_names = ', '.join([artist['name'] for artist in artists])
-
-    current_track_info = {
-    	"id": track_id,
-    	"track_name": track_name,
-    	"artists": artist_names,
-    	"link": link
-    }
-
-    return current_track_info
-
-
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+auth = tweepy.auth.OAuthHandler(API_KEY,API_SECRET_KEY)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+api = tweepy.API(auth)
+previousSongName = ""
+# Fetching the playing song
+while(1):
+    response = requests.get("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=shangod12&api_key=b4a65f0d1469c897f0bbf25cc52bcb80&format=json")
+    recentTracks = response.json()
+    lastTrack = recentTracks['recenttracks']['track'][0]
+    artistName = lastTrack['artist']['#text']
+    albumName = lastTrack['album']['#text']
+    songName = lastTrack['name']
+    if(songName != previousSongName):
+        status = "🔊 " + songName + " by " + artistName + "\n"  + "📀 " + albumName
+        api.update_status(status)
+        previousSongName = songName
+    else:
+        pass
+    time.sleep(200)
