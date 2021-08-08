@@ -1,26 +1,24 @@
 import tweepy
 import requests
 import time
-# from configparser import ConfigParser
+from configparser import ConfigParser
+import keys as keys
 
 # configur = ConfigParser()
 # print (configur.read('config.ini'))
 # print ("Sections : ", configur.sections())
 # print ("Installation Library : ", configur.get('keys','API_KEY'))
-
+# print(keys.API_KEY)
 # API_KEY = configur.get('keys', 'API_KEY')
 # API_SECRET_KEY = configur.get('keys', 'API_SECRET_KEY')
 # ACCESS_TOKEN = configur.get('keys', 'ACCESS_TOKEN')
 # ACCESS_TOKEN_SECRET = configur.get('keys', 'ACCESS_TOKEN_SECRET')
 
-API_KEY = "0fRg4S3x3fpavfD2wj84Pc5H3"
-API_SECRET_KEY = "EYVJMmTuIzMeIL5LuWciNTY1X2OfjP6jDG6vg2QaxgWhnQ2kxV"
-ACCESS_TOKEN = "1407756418569048067-ZbPnVjXxhG4sPyW54IQykd5AljECBi"
-ACCESS_TOKEN_SECRET = "6wB29PK9S6SGEeZNksxipkTD4FAtOy3KUyFyZK4ge84Ay"
-# print(API_KEY)
-# print(API_SECRET_KEY)
-# print(ACCESS_TOKEN)
-# print(ACCESS_TOKEN_SECRET)
+API_KEY = keys.API_KEY
+API_SECRET_KEY = keys.API_SECRET_KEY
+ACCESS_TOKEN = keys.ACCESS_TOKEN
+ACCESS_TOKEN_SECRET = keys.ACCESS_TOKEN_SECRET
+
 auth = tweepy.auth.OAuthHandler(API_KEY,API_SECRET_KEY)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
