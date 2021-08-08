@@ -23,8 +23,11 @@ while(1):
     songName = lastTrack['name']
     if(songName != previousSongName):
         status = "🔊 " + songName + " by " + artistName + "\n"  + "📀 " + albumName
-        api.update_status(status)
-        previousSongName = songName
+        try:
+            api.update_status(status)
+        except:
+            print("Same song!")
+            previousSongName = songName
     else:
         pass
     time.sleep(200)
