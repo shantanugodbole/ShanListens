@@ -1,18 +1,8 @@
 import tweepy
 import requests
 import time
-from configparser import ConfigParser
+# from configparser import ConfigParser
 import keys as keys
-
-# configur = ConfigParser()
-# print (configur.read('config.ini'))
-# print ("Sections : ", configur.sections())
-# print ("Installation Library : ", configur.get('keys','API_KEY'))
-# print(keys.API_KEY)
-# API_KEY = configur.get('keys', 'API_KEY')
-# API_SECRET_KEY = configur.get('keys', 'API_SECRET_KEY')
-# ACCESS_TOKEN = configur.get('keys', 'ACCESS_TOKEN')
-# ACCESS_TOKEN_SECRET = configur.get('keys', 'ACCESS_TOKEN_SECRET')
 
 API_KEY = keys.API_KEY
 API_SECRET_KEY = keys.API_SECRET_KEY
