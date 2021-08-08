@@ -8,12 +8,14 @@ print (configur.read('config.ini'))
 print ("Sections : ", configur.sections())
 print ("Installation Library : ", configur.get('keys','API_KEY'))
 
-# API_KEY = "0fRg4S3x3fpavfD2wj84Pc5H3"
 API_KEY = configur.get('keys', 'API_KEY')
 API_SECRET_KEY = configur.get('keys', 'API_SECRET_KEY')
 ACCESS_TOKEN = configur.get('keys', 'ACCESS_TOKEN')
 ACCESS_TOKEN_SECRET = configur.get('keys', 'ACCESS_TOKEN_SECRET')
-
+print(API_KEY)
+print(API_SECRET_KEY)
+print(ACCESS_TOKEN)
+print(ACCESS_TOKEN_SECRET)
 auth = tweepy.auth.OAuthHandler(API_KEY,API_SECRET_KEY)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
